@@ -5,6 +5,7 @@ const thoughtController = {
   //get all thoughts
   getAllthoughts(req, res) {
     Thought.find()
+      .select("-__v")
       .then((dbThoughtData) => res.json(dbThoughtData))
       .catch((err) => res.status(400).json(err));
   },
@@ -97,10 +98,10 @@ const thoughtController = {
   },
 
   //delete reactions
-  deletereaction({params}, res) {
+  deletereaction({ params }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
-      { $pull: { reactions: {reactionId: params.reactionId} } },
+      { $pull: { reactions: { reactionId: params.reactionId } } },
       { new: true }
     )
       .then((thoughtData) => {
