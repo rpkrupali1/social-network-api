@@ -3,10 +3,24 @@ const User = require("../models/User");
 
 const thoughtController = {
   //get all thoughts
-  getAllthoughts(req, res) {},
+  getAllthoughts(req, res) {
+    Thought.find()
+      .then((dbThoughtData) => res.json(dbThoughtData))
+      .catch((err) => res.status(400).json(err));
+  },
 
   //get single thought by id
-  getThought(req, res) {},
+  getThought({ params }, res) {
+    Thought.findById(params.id)
+      .then((dbThoughtData) => {
+        if (!dbThoughtData) {
+          res.status(404).json({ message: "No thought found with this id" });
+          return;
+        }
+        res.json(dbThoughtData);
+      })
+      .catch((err) => res.status(400).json(err));
+  },
 
   //create thought
   createThought({ body }, res) {
@@ -25,14 +39,45 @@ const thoughtController = {
         }
         res.json(dbuserdata);
       })
-      .catch((err) => res.json(err));
+      .catch((err) => res.status(400).json(err));
   },
 
   //update thought
-  updateThought(req, res) {},
+  updateThought({ params, body }, res) {
+    Thought.findOneAndUpdate({ _id: params.id }, body, { new: true })
+      .then((dbThoughtData) => {
+        if (!dbThoughtData) {
+          res.status(404).json({ message: "No thought found with this id" });
+          return;
+        }
+        res.json(dbThoughtData);
+      })
+      .catch((err) => res.status(400).json(err));
+  },
 
   //remove thought
-  deleteThought(req, res) {},
+  deleteThought({ params }, res) {
+    Thought.findOneAndDelete({ _id: params.id })
+      .then((deleteThought) => {
+        if (!deleteThought) {
+          res.status(404).json({ message: "There is no thought with this id" });
+          return;
+        }
+        return User.findByIdAndUpdate(
+          { _id: params.userId },
+          { $pull: { thoughts: params.id } },
+          { new: true }
+        );
+      })
+      .then((userData) => {
+        if (!userData) {
+          res.status(404).json({ message: "No user found with this thought" });
+          return;
+        }
+        res.json(userData);
+      })
+      .catch((err) => res.status(400).json(err));
+  },
 };
 
 module.exports = thoughtController;

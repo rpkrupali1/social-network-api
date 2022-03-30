@@ -4,7 +4,12 @@ const userController = {
   //get all users
   getAllUsers(req, res) {
     User.find()
+      .populate({
+        path: "thoughts",
+        select: "-__v",
+      })
       .select("-__v")
+      .sort({ _id: -1 })
       .then((userData) => res.json(userData))
       .catch((err) => res.status(400).json(err));
   },
@@ -12,6 +17,10 @@ const userController = {
   //get user by id
   getUserByid({ params }, res) {
     User.findOne({ _id: params.id })
+      .populate({
+        path: "thoughts",
+        select: "-__v",
+      })
       .select("-__v")
       .then((userData) => {
         if (!userData) {
@@ -46,6 +55,12 @@ const userController = {
 
   //delete User
   deleteUser(req, res) {},
+
+  //add friend
+  addFriend(req, res) {},
+
+  //delete friend
+  deleteFriend(req, res) {},
 };
 
 module.exports = userController;
