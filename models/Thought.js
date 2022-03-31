@@ -13,14 +13,19 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now(),
-      get: (dateValue) => moment(dateValue).format('MMMM Do, YYYY [at] h:mm a'),
+      get: (dateValue) => moment(dateValue).format("MMMM Do, YYYY [at] h:mm a"),
     },
     username: {
       type: String,
       required: true,
     },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     reactions: [reactionSchema],
-  },
+  },  
   {
     toJSON: {
       virtuals: true,

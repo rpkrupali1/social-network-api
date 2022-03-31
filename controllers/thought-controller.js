@@ -65,14 +65,14 @@ const thoughtController = {
           return;
         }
         return User.findByIdAndUpdate(
-          { _id: params.userId },
+          { _id: deleteThought.userId },
           { $pull: { thoughts: params.id } },
           { new: true }
         );
       })
       .then((userData) => {
         if (!userData) {
-          res.status(404).json({ message: "No user found with this thought" });
+          res.status(404).json({ message: "Thought is deleted but No user found with this thought" });
           return;
         }
         res.json(userData);
