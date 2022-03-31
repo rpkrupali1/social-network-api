@@ -65,6 +65,7 @@ const userController = {
         //delete all associated thoughts if any
         Thought.deleteMany({ userId: params.id }).then((thoughtData) => {
           res.json({
+            message: "User and associated all thoughts deleted",
             userData,
             deletedThoughtCounts: thoughtData.deletedCount,
           });
