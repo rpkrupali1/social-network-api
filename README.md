@@ -7,8 +7,8 @@ This repository contains the code to build an API for a social network web appli
 - [Technologies Used](#technologies-used)
 - [Run Instructions](#run-instructions)
 - [Application Details](#application-details)
+- [Walkthrough Videos](#walkthrough-videos)
 - [Test Instructions](#test-instructions)
-- [More Information](#more-information)
 - [Contributors](#contributor)
 - [License](#license)
 
@@ -209,9 +209,26 @@ Add reaction response sample: All associated response for that thought will be r
 }
 ```
 
+## Walkthrough Videos
+
+User calls
+https://user-images.githubusercontent.com/38411252/161318693-4f9c8b39-7cac-437a-921a-ddc20a18bec0.mp4
+
+Friends calls
+https://user-images.githubusercontent.com/38411252/161318677-d6c3328c-9953-4176-85ab-3c788caa5f72.mp4
+
+Thought calls
+https://user-images.githubusercontent.com/38411252/161318668-f917ad89-d1d9-45a6-b56e-2454fab1383e.mp4
+
+Reactions calls
+https://user-images.githubusercontent.com/38411252/161318632-12b8bd47-c74d-4f32-aed6-0bc5cc1bcce1.mp4
+
+Delete Calls
+https://user-images.githubusercontent.com/38411252/161318663-99b10dd5-ef57-49e8-aba4-9b82107e0372.mp4
+
 ## Test Instructions
 
-If you would like to test, then use `Insomnia` collection given here
+If you would like to test, then use `Insomnia` collection given [here](./Assets/Insomnia_2022-04-01.json)
 
 ## Contributor
 
