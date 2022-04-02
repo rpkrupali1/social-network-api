@@ -12,7 +12,7 @@ const userController = {
       .select("-__v")
       .sort({ _id: -1 })
       .then((userData) => res.json(userData))
-      .catch((err) => res.status(400).json(err));
+      .catch((err) => res.status(500).json(err));
   },
 
   //get user by id
@@ -37,7 +37,7 @@ const userController = {
   createUser({ body }, res) {
     User.create(body)
       .then((userData) => res.json(userData))
-      .catch((err) => res.status(400).json(err));
+      .catch((err) => res.status(500).json(err));
   },
 
   //update user
@@ -49,10 +49,11 @@ const userController = {
       .then((dbUserData) => {
         if (!dbUserData) {
           res.status(404).json({ message: "No user found with this id!" });
+          return;
         }
         res.json(dbUserData);
       })
-      .catch((err) => res.status(400).json(err));
+      .catch((err) => res.status(500).json(err));
   },
 
   //delete User
@@ -72,7 +73,7 @@ const userController = {
           });
         });
       })
-      .catch((err) => res.status(400).json(err));
+      .catch((err) => res.status(500).json(err));
   },
 
   //add friend
@@ -85,10 +86,11 @@ const userController = {
       .then((dbUserData) => {
         if (!dbUserData) {
           res.status(404).json({ message: "No user found with this id!" });
+          return;
         }
         res.json(dbUserData);
       })
-      .catch((err) => res.status(400).json(err));
+      .catch((err) => res.status(500).json(err));
   },
 
   //delete friend
@@ -101,10 +103,11 @@ const userController = {
       .then((dbUserData) => {
         if (!dbUserData) {
           res.status(404).json({ message: "No user found with this id!" });
+          return;
         }
         res.json(dbUserData);
       })
-      .catch((err) => res.status(400).json(err));
+      .catch((err) => res.status(500).json(err));
   },
 };
 
